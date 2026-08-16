@@ -46,14 +46,14 @@ Seven GA4 on-site engagement signals: organic sessions, pageviews, engaged sessi
 
 ### Leakage checks
 
-- Excluded `ctr` and `clicks` — the target is built from them (circular).
-- Excluded `expected_ctr` and `ctr_gap` — they are the target.
-- Excluded `position` — it defines the tiers the target is measured against (circular).
-- Confirmed every retained feature correlates only modestly with the target (about 0.1–0.36 in magnitude, none near ±1), consistent with a real, non-leaky signal.
+- Excluded `ctr` and `clicks` - the target is built from them (circular).
+- Excluded `expected_ctr` and `ctr_gap` - they are the target.
+- Excluded `position` - it defines the tiers the target is measured against (circular).
+- Confirmed every retained feature correlates only modestly with the target (about 0.1-0.36 in magnitude, none near ±1), consistent with a real, non-leaky signal.
 
 ### Baseline and validation
 
-The baseline is a transparent hand rule that ranks pages by the CTR gap directly. Validation uses client-holdout (whole clients held out for testing), so the model is judged on brands it never trained on. Three regressors were compared — Linear Regression, K-Nearest Neighbors, and Decision Tree — scored on MAE and R².
+The baseline is a transparent hand rule that ranks pages by the CTR gap directly. Validation uses client-holdout (whole clients held out for testing), so the model is judged on brands it never trained on. Three regressors were compared - Linear Regression, K-Nearest Neighbors, and Decision Tree - scored on MAE and R².
 
 ## 4. Results
 
@@ -63,11 +63,11 @@ The baseline is a transparent hand rule that ranks pages by the CTR gap directly
 | KNN | 0.00423 | 0.038 |
 | Decision Tree | 0.00450 | −0.252 |
 
-Linear Regression performed best. The Decision Tree's negative R² means it did worse than predicting the average on unseen clients — it overfit the training clients. The simplest model generalised best. An R² of about 0.11 is modest but expected: I predict a noisy web-behaviour signal from engagement alone and deliberately excluded the leaky columns that would inflate it.
+Linear Regression performed best. The Decision Tree's negative R² means it did worse than predicting the average on unseen clients - it overfit the training clients. The simplest model generalised best. An R² of about 0.11 is modest but expected: I predict a noisy web-behaviour signal from engagement alone and deliberately excluded the leaky columns that would inflate it.
 
 ![Mean CTR by position tier](fig_ctr_by_tier.png)
 
-*CTR falls sharply as search position worsens — the signal the lane rests on.*
+*CTR falls sharply as search position worsens - the signal the lane rests on.*
 
 For a ranking task, Precision@K matters more than R²: of the top-K flagged pages, how many are genuine under-earners?
 
@@ -81,7 +81,7 @@ For a ranking task, Precision@K matters more than R²: of the top-K flagged page
 
 *Precision@K: the model reaches ~0.88 at K=50 using engagement signals only.*
 
-The baseline scores 1.000 *by construction*: it ranks by the actual CTR gap — the answer itself — so it cannot find under-earners before their CTR is known. The model ranks using engagement signals only, never seeing CTR, and still places about 88% genuine under-earners in its top 50. That is the useful, honest result: engagement behaviour alone predicts under-earning well enough to build a queue an editor can act on.
+The baseline scores 1.000 *by construction*: it ranks by the actual CTR gap - the answer itself - so it cannot find under-earners before their CTR is known. The model ranks using engagement signals only, never seeing CTR, and still places about 88% genuine under-earners in its top 50. That is the useful, honest result: engagement behaviour alone predicts under-earning well enough to build a queue an editor can act on.
 
 ## 5. Limitations & honest framing
 
@@ -111,7 +111,7 @@ The model scores every page by its predicted CTR gap and produces a ranked revie
 
 ## 7. Reproducibility
 
-All work — every weekly assignment notebook and the capstone notebook — is in the project repository under `work/notebooks/`. The capstone notebook regenerates the ranked queue and every figure in this paper from the source data on each run.
+All work - every weekly assignment notebook and the capstone notebook - is in the project repository under `work/notebooks/`. The capstone notebook regenerates the ranked queue and every figure in this paper from the source data on each run.
 
 Repository: [github.com/ArshnoorSinghh/ML-Project](https://github.com/ArshnoorSinghh/ML-Project)
 
