@@ -102,6 +102,32 @@ The model scores every page by its predicted CTR gap and produces a ranked revie
 - `LOW_CTR_FOR_POSITION → review_title_and_snippet`: the page earns fewer clicks than expected for its position tier. Review the search title and meta description first, since those drive clicks at a fixed position.
 - `OK → monitor`: no predicted under-earning; keep watching.
 
+### Top of the ranked queue (observed)
+
+Applying the model to the March pages, these are the ten highest-scoring
+under-earners - the pages an editor would review first. Identifiers are salted
+hashes; no client or page is identifiable.
+
+| Rank | content_hash_id | Position tier | Impressions | Predicted gap | Reason code | Action |
+|------|-----------------|---------------|-------------|---------------|-------------|--------|
+| 1 | content_6982fdcd6a6b28f8 | top_3 | 343 | 0.056 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 2 | content_b116498610b4e6da | page_1 | 153 | 0.030 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 3 | content_6982fdcd6a6b28f8 | top_3 | 1,255 | 0.014 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 4 | content_5460a0e854602a47 | deep | 167 | 0.010 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 5 | content_5460a0e854602a47 | deep | 735 | 0.010 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 6 | content_67fe53778dee2a5d | deep | 235 | 0.009 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 7 | content_87bc70dbf26df4b9 | deep | 143 | 0.009 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 8 | content_5460a0e854602a47 | deep | 816 | 0.009 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 9 | content_6a33ac36a098edcd | deep | 271 | 0.009 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+| 10 | content_5460a0e854602a47 | deep | 554 | 0.008 | LOW_CTR_FOR_POSITION | review_title_and_snippet |
+
+What stands out: the single strongest recommendation is a top_3 page - it ranks
+in the top three search positions yet is predicted to under-earn clicks badly,
+which makes it a prime title/snippet candidate because it already has the
+visibility. Several other flagged pages sit deep in the results, where a snippet
+rewrite alone may help less, since low visibility (not just low CTR) limits them.
+These are flagged for human review, not treated as guaranteed wins.
+
 ### Intended use and no-go list
 
 - **Who / what:** a content editor prioritising a limited review budget, as decision-support.
